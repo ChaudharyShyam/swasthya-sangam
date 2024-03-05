@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "676579206843",
+    "project_id": "swashthya-sangam",
+    "storage_bucket": "swashthya-sangam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676579206843:android:a00c283c3bfc29b7f72b9e",
+        "android_client_info": {
+          "package_name": "com.example.swasthyasangam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLrULt8X7PHAsetgu0bJLgJkRv9-IFV1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
