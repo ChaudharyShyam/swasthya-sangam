@@ -12,7 +12,8 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -22,6 +23,20 @@ public class HomeActivity extends AppCompatActivity {
     private int currentIndex = 0;
     private Handler handler;
     private final int SWITCH_INTERVAL = 3000; // Switch interval in milliseconds
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish(); // Exit the app
+                    }
+                })
+                .setNegativeButton("No", null) // Do nothing if "No" is clicked
+                .show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

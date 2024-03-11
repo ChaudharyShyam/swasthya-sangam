@@ -58,7 +58,7 @@ public class MedicineBookActivity extends AppCompatActivity implements PaymentRe
                     Checkout checkout = new Checkout();
 
                     // set your id as below
-                    checkout.setKeyID("rzp_test_UfdnSXSrLGwDgR");
+                    checkout.setKeyID("rzp_test_YQHRxpx2FHuLhs");
 
                     // set image
                     checkout.setImage(R.drawable.logo);

@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends AppCompatActivity {
     EditText edUsername, edPassword;
     Button btn;
-    TextView tv;
+    TextView tv, forgetPassword;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -30,6 +30,14 @@ public class LoginActivity extends AppCompatActivity {
         edPassword = findViewById(R.id.editTextLoginPassword);
         btn = findViewById(R.id.buttonLogin);
         tv = findViewById(R.id.textViewNewUser);
+        forgetPassword=findViewById(R.id.textViewForgotpassword);
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+            }
+        });
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);

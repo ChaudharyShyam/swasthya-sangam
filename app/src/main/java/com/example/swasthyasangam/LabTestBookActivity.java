@@ -15,7 +15,6 @@ import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 public class LabTestBookActivity extends AppCompatActivity implements PaymentResultListener {
     EditText edname, edaddress, edpincode, edcontact;
     Button BtnBooking;
@@ -57,7 +56,7 @@ public class LabTestBookActivity extends AppCompatActivity implements PaymentRes
                     Checkout checkout = new Checkout();
 
                     // set your id as below
-                    checkout.setKeyID("rzp_test_UfdnSXSrLGwDgR");
+                    checkout.setKeyID("rzp_test_YQHRxpx2FHuLhs");
 
                     // set image
                     checkout.setImage(R.drawable.logo);

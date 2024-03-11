@@ -29,11 +29,11 @@
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="75dp"
         android:columnCount="1"
         android:rowCount="5">
 
@@ -48,7 +48,7 @@
             android:layout_gravity="fill"
             app:cardBackgroundColor="#06D5EF"
             app:cardCornerRadius="13dp"
-            app:cardElevation="0dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
             <TextView
@@ -76,7 +76,7 @@
             android:layout_gravity="fill"
             app:cardBackgroundColor="#06D5EF"
             app:cardCornerRadius="13dp"
-            app:cardElevation="0dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
             <TextView
@@ -103,7 +103,7 @@
             android:layout_gravity="fill"
             app:cardBackgroundColor="#06D5EF"
             app:cardCornerRadius="13dp"
-            app:cardElevation="0dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
             <TextView
@@ -130,7 +130,7 @@
             android:layout_gravity="fill"
             app:cardBackgroundColor="#06D5EF"
             app:cardCornerRadius="13dp"
-            app:cardElevation="0dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
             <TextView
@@ -157,7 +157,7 @@
             android:layout_gravity="fill"
             app:cardBackgroundColor="#06D5EF"
             app:cardCornerRadius="13dp"
-            app:cardElevation="0dp"
+            app:cardElevation="3dp"
             app:cardUseCompatPadding="true">
 
             <TextView

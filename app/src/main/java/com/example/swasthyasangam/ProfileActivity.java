@@ -2,6 +2,7 @@ package com.example.swasthyasangam;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,12 +26,26 @@ public class ProfileActivity extends AppCompatActivity {
 
     ImageView profilepic;
     TextView tv;
-    Button btn;
+    CardView update , reportProblem, FAQ;
     SharedPreferences sharedPreferences;
     String username;
     Database database;
     private static final int PICK_IMAGE = 1;
     private static final int TAKE_PHOTO = 2;
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish(); // Exit the app
+                    }
+                })
+                .setNegativeButton("No", null) // Do nothing if "No" is clicked
+                .show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +108,29 @@ public class ProfileActivity extends AppCompatActivity {
             builder.show();
         });
 
+        reportProblem = findViewById(R.id.ReportProblem);
+        FAQ = findViewById(R.id.FAQ);
+
+        if (reportProblem != null) {
+            reportProblem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(ProfileActivity.this, ReportProblemActivity.class));
+                }
+            });
+        }
+
+        if (FAQ != null) {
+            FAQ.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(ProfileActivity.this, FAQActivity.class));
+                }
+            });
+        }
+
         // Click listener for update button
-        btn.setOnClickListener(v -> updateProfileImage());
+        update.setOnClickListener(v -> updateProfileImage());
 
         // Click listener for logout button
         Button exit = findViewById(R.id.buttonLogOut);
@@ -104,10 +141,10 @@ public class ProfileActivity extends AppCompatActivity {
     private void initViews() {
         profilepic = findViewById(R.id.ProfileImage);
         tv = findViewById(R.id.TvUsername);
-        btn = findViewById(R.id.buttonUpdate);
+        update = findViewById(R.id.UpdateProfile);
         sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "");
-        tv.setText("Hello, \n" + username+"  \uD83D\uDC4B"+"\n\nHow are you feel today?");
+        tv.setText("Hello," +"\uD83D\uDC4B "+ username);
         database = new Database(getApplicationContext(), "SwasthayaSangam", null, 1);
     }
     // Load profile image from database

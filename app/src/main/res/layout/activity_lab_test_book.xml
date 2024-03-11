@@ -11,13 +11,13 @@
         android:id="@+id/textViewApptitle"
         android:layout_width="320dp"
         android:layout_height="43dp"
-        android:layout_marginTop="28dp"
-        android:text="Please Fill All Details"
+        android:layout_marginTop="24dp"
+        android:text="CheckOut"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,6 +29,20 @@
         android:layout_marginBottom="-35dp">
 
 
+        <TextView
+            android:id="@+id/textViewApptitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_marginTop="52dp"
+            android:text="Please fill All Details"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/LBcontactnumber"
             android:layout_width="345dp"
@@ -38,7 +52,7 @@
             android:drawableLeft="@drawable/baseline_phone_24"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Conteact Number"
+            android:hint="Contact Number"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -101,7 +115,7 @@
             android:id="@+id/LBfullname"
             android:layout_width="345dp"
             android:layout_height="54dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="120dp"
             android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="10dp"

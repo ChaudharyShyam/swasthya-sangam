@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:fontFamily="@font/antic"
-        android:text="स्वास्थ्यम् विनियन्ति शक्तिः, व्यवस्था तदनुग्रहः"
+        android:text="आरोग्यं परमं भाग्यं स्वास्थ्यं सर्वार्थसाधनम्"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

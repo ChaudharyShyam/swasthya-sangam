@@ -42,6 +42,7 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:text="Cart is Empty"
+            android:textColor="@color/TextColor"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

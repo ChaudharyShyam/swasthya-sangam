@@ -5,12 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class Database extends SQLiteOpenHelper {
+
+    private Context context;
     public Database(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        this.context = context;
     }
 
     @Override
@@ -26,6 +30,9 @@ public class Database extends SQLiteOpenHelper {
 
         String qry4 = "create table profile(username text, image blob)";
         db.execSQL(qry4);
+
+        String qry5 = "create table Problems(username, name text, email text, problem text)";
+        db.execSQL(qry5);
     }
 
     @Override
@@ -54,6 +61,15 @@ public class Database extends SQLiteOpenHelper {
         }
         return result;
     }
+
+    public void updatePassword(String username, String newPassword) {
+        ContentValues cv = new ContentValues();
+        cv.put("password", newPassword);
+        SQLiteDatabase database = getWritableDatabase();
+        database.update("users", cv, "username=?", new String[]{username});
+        database.close();
+    }
+
     public void addCart(String username, String product, float price, String otype){
         ContentValues cv = new ContentValues();
         cv.put("username",username);
@@ -257,5 +273,19 @@ public class Database extends SQLiteOpenHelper {
         }
         return isEmpty;
     }
+
+    public boolean insertData(String username, String name, String email, String problem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username); // Add username
+        contentValues.put("name", name);
+        contentValues.put("email", email);
+        contentValues.put("problem", problem);
+        long result = db.insert("Problems", null, contentValues); // Change table name to "Problems"
+        db.close(); // Close the database connection
+
+        return result != -1; // Return true if insertion was successful, false otherwise
+    }
+
 
 }

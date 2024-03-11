@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 public class RegisterActivity extends AppCompatActivity {
     EditText edUsername, edEmail, edPassword, edConfirm;
     Button btn;
-    TextView tv;
+    TextView tv ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

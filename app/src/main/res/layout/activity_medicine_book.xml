@@ -11,13 +11,13 @@
         android:id="@+id/textViewApptitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Please Fill All Details"
+        android:layout_marginTop="28dp"
+        android:text="CheckOut"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +27,19 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/buttom_background"
         android:layout_marginBottom="-35dp">
+
+        <TextView
+            android:id="@+id/textViewApptitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="Please fill All Details"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/MBcontactnumber"
@@ -100,7 +113,7 @@
             android:id="@+id/MBfullname"
             android:layout_width="345dp"
             android:layout_height="54dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="120dp"
             android:background="@drawable/input_bg"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="10dp"

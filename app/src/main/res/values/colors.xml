@@ -3,7 +3,8 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple_200">#8886FC</color>
-    <color name="grey">#9c9282</color>
+    <color name="grey">#ebebeb</color>
+    <color name="TextColor">#616161</color>
     <color name="blue">#03c2fc</color>
     <color name="colorAccent">#03c2fc</color>
     <color name="lightblack">#282829</color>
