@@ -81,10 +81,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Click listener for profile picture
         profilepic.setOnClickListener(v -> {
-            // Show dialog with options to choose from gallery or camera
+            // Show dialog with options to choose from gallery, camera, or remove image
             AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
             builder.setTitle("Choose an option")
-                    .setItems(new CharSequence[]{"Take Photo", "Choose from Gallery"}, new DialogInterface.OnClickListener() {
+                    .setItems(new CharSequence[]{"Take Photo", "Choose from Gallery", "Remove Profile Image"}, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
@@ -101,6 +101,10 @@ public class ProfileActivity extends AppCompatActivity {
                                     // Choose from Gallery option selected
                                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                                     startActivityForResult(galleryIntent, PICK_IMAGE);
+                                    break;
+                                case 2:
+                                    // Remove Profile Image option selected
+                                    removeProfileImage();
                                     break;
                             }
                         }
@@ -221,5 +225,15 @@ public class ProfileActivity extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    private void removeProfileImage() {
+        boolean removed = database.addOrUpdateProfile(username, null); // Pass null to remove the image
+        if (removed) {
+            // Clear the profile image view or set a default image
+            profilepic.setImageResource(R.drawable.profileimage); // Set default image
+            Toast.makeText(ProfileActivity.this, "Profile image removed successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ProfileActivity.this, "Failed to remove profile image", Toast.LENGTH_SHORT).show();
+        }
     }
 }

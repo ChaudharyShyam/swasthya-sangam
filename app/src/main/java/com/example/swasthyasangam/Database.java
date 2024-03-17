@@ -5,7 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+import android.util.Base64;
+
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
@@ -48,6 +49,42 @@ public class Database extends SQLiteOpenHelper {
         database.insert("users", null, cv);
         database.close();
 
+    }
+
+    public ArrayList<String> getUserData() {
+        ArrayList<String> arr = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor c = database.rawQuery("SELECT * FROM users", null);
+        if (c != null) {
+            int usernameIndex = c.getColumnIndex("username");
+            int emailIndex = c.getColumnIndex("email");
+            int passwordIndex = c.getColumnIndex("password");
+
+            while (c.moveToNext()) {
+                String username = "";
+                String email = "";
+                String password = "";
+
+                // Check if column indexes are valid
+                if (usernameIndex != -1) {
+                    username = c.getString(usernameIndex);
+                }
+                if (emailIndex != -1) {
+                    email = c.getString(emailIndex);
+                }
+                if (passwordIndex != -1) {
+                    password = c.getString(passwordIndex);
+                }
+
+                // Add valid data to the ArrayList
+                if (!username.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                    arr.add(username + "$" + email + "$" + password);
+                }
+            }
+            c.close(); // Close the cursor after use
+        }
+        database.close();
+        return arr;
     }
     public int login(String username , String password){
         int result = 0;
@@ -141,6 +178,72 @@ public class Database extends SQLiteOpenHelper {
         database.insert("orderplace",null,cv);
         database.close();
     }
+
+    public ArrayList<String> getOrderPlaceData() {
+        ArrayList<String> arr = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor c = database.rawQuery("SELECT * FROM orderplace", null);
+        if (c != null) {
+            int usernameIndex = c.getColumnIndex("username");
+            int fullnameIndex = c.getColumnIndex("fullname");
+            int addressIndex = c.getColumnIndex("address");
+            int contactNoIndex = c.getColumnIndex("contactno");
+            int pincodeIndex = c.getColumnIndex("pincode");
+            int dateIndex = c.getColumnIndex("date");
+            int timeIndex = c.getColumnIndex("time");
+            int amountIndex = c.getColumnIndex("amount");
+            int otypeIndex = c.getColumnIndex("otype");
+
+            while (c.moveToNext()) {
+                String username = "";
+                String fullname = "";
+                String address = "";
+                String contactNo = "";
+                int pincode = 0;
+                String date = "";
+                String time = "";
+                float amount = 0f;
+                String otype = "";
+
+                // Check if column indexes are valid
+                if (usernameIndex != -1) {
+                    username = c.getString(usernameIndex);
+                }
+                if (fullnameIndex != -1) {
+                    fullname = c.getString(fullnameIndex);
+                }
+                if (addressIndex != -1) {
+                    address = c.getString(addressIndex);
+                }
+                if (contactNoIndex != -1) {
+                    contactNo = c.getString(contactNoIndex);
+                }
+                if (pincodeIndex != -1) {
+                    pincode = c.getInt(pincodeIndex);
+                }
+                if (dateIndex != -1) {
+                    date = c.getString(dateIndex);
+                }
+                if (timeIndex != -1) {
+                    time = c.getString(timeIndex);
+                }
+                if (amountIndex != -1) {
+                    amount = c.getFloat(amountIndex);
+                }
+                if (otypeIndex != -1) {
+                    otype = c.getString(otypeIndex);
+                }
+
+                // Add valid data to the ArrayList
+                arr.add(username + "$" + fullname + "$" + address + "$" + contactNo + "$" + pincode + "$" +
+                        date + "$" + time + "$" + amount + "$" + otype);
+            }
+            c.close(); // Close the cursor after use
+        }
+        database.close();
+        return arr;
+    }
+
 
     public ArrayList getOrderData(String username){
         ArrayList<String> arr = new ArrayList<>();
@@ -246,6 +349,31 @@ public class Database extends SQLiteOpenHelper {
         return updatedSuccessfully;
     }
 
+    public ArrayList<String> getProfileData() {
+        ArrayList<String> arr = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor c = database.rawQuery("SELECT * FROM profile", null);
+        if (c != null) {
+            int usernameIndex = c.getColumnIndex("username");
+            int imageIndex = c.getColumnIndex("image");
+
+            while (c.moveToNext()) {
+                String username = c.getString(usernameIndex);
+                byte[] imageByteArray = c.getBlob(imageIndex);
+
+                // Convert byte array to base64 string for easier display or manipulation
+                String imageBase64 = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
+
+                // Add username and imageBase64 string to the ArrayList
+                arr.add(username + "$" + imageBase64);
+            }
+            c.close(); // Close the cursor after use
+        }
+        database.close();
+        return arr;
+    }
+
+
     public boolean isCartEmpty(String username, String otype) {
         boolean isEmpty = true;
         SQLiteDatabase database = null;
@@ -286,6 +414,31 @@ public class Database extends SQLiteOpenHelper {
 
         return result != -1; // Return true if insertion was successful, false otherwise
     }
+
+    public ArrayList<String> getProblemsData() {
+        ArrayList<String> arr = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor c = database.rawQuery("SELECT * FROM Problems", null);
+        if (c != null) {
+            int usernameIndex = c.getColumnIndex("username");
+            int nameIndex = c.getColumnIndex("name");
+            int emailIndex = c.getColumnIndex("email");
+            int problemIndex = c.getColumnIndex("problem");
+
+            while (c.moveToNext()) {
+                String username = c.getString(usernameIndex);
+                String name = c.getString(nameIndex);
+                String email = c.getString(emailIndex);
+                String problem = c.getString(problemIndex);
+
+                arr.add(username + "$" + name + "$" + email + "$" + problem);
+            }
+            c.close(); // Close the cursor after use
+        }
+        database.close();
+        return arr;
+    }
+
 
 
 }

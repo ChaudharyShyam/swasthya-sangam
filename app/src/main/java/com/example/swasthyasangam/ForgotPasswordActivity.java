@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +31,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         newPasswordEditText = findViewById(R.id.editTextAppnumber);
         confirmNewPasswordEditText = findViewById(R.id.editTextAppfees);
         resetPasswordButton = findViewById(R.id.buttonBookAppointment);
+
+        TextView tv = findViewById(R.id.textViewOldUser);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ForgotPasswordActivity.this,LoginActivity.class));
+            }
+        });
 
         resetPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,6 +19,24 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProblemsDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrdersDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
         <activity
