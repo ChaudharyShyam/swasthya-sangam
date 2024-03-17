@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="descriptionTextView" type="id" />
+    <item name="why" type="id" />
+    <item name="descriptionTextView2" type="id" />
+    <item name="faq" type="id" />
+    <item name="recyclerView" type="id" />
+    <item name="contact" type="id" />
+    <item name="textViewAddress" type="id" />
+    <item name="textViewPhone" type="id" />
+    <item name="textViewEmail" type="id" />
+    <item name="textViewSocialMedia" type="id" />
+    <item name="socialMediaLayout" type="id" />
+    <item name="imageViewInsta" type="id" />
+    <item name="imageViewFacebook" type="id" />
+    <item name="imageViewLinkedIn" type="id" />
+    <item name="imageViewTwitter" type="id" />
+</resources>
