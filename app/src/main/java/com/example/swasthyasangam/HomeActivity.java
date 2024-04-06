@@ -5,16 +5,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,6 +29,10 @@ public class HomeActivity extends AppCompatActivity {
     private int currentIndex = 0;
     private Handler handler;
     private final int SWITCH_INTERVAL = 3000; // Switch interval in milliseconds
+
+    private RecyclerView mRecyclerView;
+    private HomeAdapter mAdapter;
+    private ArrayList<HashMap<String, String>> orderDetailsList;
 
     @Override
     public void onBackPressed() {
@@ -70,17 +80,6 @@ public class HomeActivity extends AppCompatActivity {
         String username = sharedPreferences.getString("username", "");
         Toast.makeText(getApplicationContext(), "Welcome " + username, Toast.LENGTH_SHORT).show();
 
-//        CardView exit = findViewById(R.id.Logout);
-//        exit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.clear();
-//                editor.apply();
-//                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-//            }
-//        });
-
         CardView doctor = findViewById(R.id.FindDoctor);
         doctor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,15 +104,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        CardView OrderDetail = findViewById(R.id.OrderDetail);
-//        OrderDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomeActivity.this, OrderDetailsActivity.class));
-//            }
-//        });
-
-
         CardView Medicine = findViewById(R.id.cardBuyMedicine);
         Medicine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +111,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, MedicineActivity.class));
             }
         });
-
-
 
         // Image Switcher Initialization
         imageSwitcher = findViewById(R.id.imageSwitcher);
@@ -147,6 +135,45 @@ public class HomeActivity extends AppCompatActivity {
         // Automatic Image Switching
         handler = new Handler();
         handler.postDelayed(imageSwitchRunnable, SWITCH_INTERVAL);
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+// Set layout manager for horizontal scrolling
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        Database database = new Database(getApplicationContext(), "SwasthayaSangam", null, 1);
+
+// Fetch data from the database
+        ArrayList<String> dbData = database.getUpcomingAppointments(username);
+
+        if (dbData != null && !dbData.isEmpty()) {
+            // Process data
+            ArrayList<HashMap<String, String>> orderDetailsList = new ArrayList<>();
+            for (String appointment : dbData) {
+                String[] appointmentDetails = appointment.split("\\$");
+                if (appointmentDetails.length >= 8) { // Ensure array length to prevent IndexOutOfBoundsException
+                    HashMap<String, String> item = new HashMap<>();
+                    item.put("fullname", appointmentDetails[1]);
+                    item.put("address", appointmentDetails[2]);
+                    item.put("date", appointmentDetails[5]);
+                    item.put("time", appointmentDetails[6]);
+                    item.put("amount", appointmentDetails[7]);
+                    item.put("contactno", appointmentDetails[3]);
+                    orderDetailsList.add(item);
+                } else {
+                    Log.e("DataError", "Invalid appointment details: " + appointment);
+                }
+            }
+
+            // Set up adapter and bind it to the RecyclerView
+            HomeAdapter adapter = new HomeAdapter(this, orderDetailsList);
+            recyclerView.setAdapter(adapter);
+        } else {
+            // Handle case where no upcoming appointments are found
+            Log.d("NoData", "No upcoming appointments found for user: " + username);
+            // Optionally, display a message to the user indicating no appointments found
+        }
+
     }
 
     private void switchImage() {

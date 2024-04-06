@@ -6,7 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Base64;
+import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
@@ -40,6 +45,74 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public ArrayList<String> getUpcomingAppointments(String username) {
+        ArrayList<String> upcomingAppointments = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+
+        // Get current date and time
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String currentDate = dateFormat.format(new Date());
+
+        // Query to fetch upcoming appointments
+        // Query to fetch upcoming appointments
+        // Query to fetch upcoming appointments
+        String[] selectionArgs = {username, "Appointment", currentDate};
+        Cursor cursor = database.rawQuery("SELECT * FROM orderplace WHERE username = ? AND otype = ? AND date >= ? ORDER BY date ASC, time ASC", selectionArgs);
+
+
+
+        if (cursor != null) {
+            try {
+                // Check if the cursor contains the expected columns
+                int columnIndexUsername = cursor.getColumnIndex("username");
+                int columnIndexFullname = cursor.getColumnIndex("fullname");
+                int columnIndexAddress = cursor.getColumnIndex("address");
+                int columnIndexContactno = cursor.getColumnIndex("contactno");
+                int columnIndexPincode = cursor.getColumnIndex("pincode");
+                int columnIndexDate = cursor.getColumnIndex("date");
+                int columnIndexTime = cursor.getColumnIndex("time");
+                int columnIndexAmount = cursor.getColumnIndex("amount");
+                int columnIndexOtype = cursor.getColumnIndex("otype");
+
+                if (cursor.moveToFirst()) {
+                    do {
+                        // Extract appointment details
+                        String appointmentUsername = cursor.getString(columnIndexUsername);
+                        String appointmentFullname = cursor.getString(columnIndexFullname);
+                        String appointmentAddress = cursor.getString(columnIndexAddress);
+                        String appointmentContactno = cursor.getString(columnIndexContactno);
+                        int appointmentPincode = cursor.getInt(columnIndexPincode);
+                        String appointmentDate = cursor.getString(columnIndexDate);
+                        String appointmentTime = cursor.getString(columnIndexTime);
+                        float appointmentAmount = cursor.getFloat(columnIndexAmount);
+                        String appointmentOtype = cursor.getString(columnIndexOtype);
+
+                        String appointmentDetails = appointmentUsername + "$" +
+                                appointmentFullname + "$" +
+                                appointmentAddress + "$" +
+                                appointmentContactno + "$" +
+                                appointmentPincode + "$" +
+                                appointmentDate + "$" +
+                                appointmentTime + "$" +
+                                appointmentAmount + "$" +
+                                appointmentOtype;
+
+                        upcomingAppointments.add(appointmentDetails);
+                    } while (cursor.moveToNext());
+                }
+            } finally {
+                cursor.close();
+            }
+        } else {
+            // Handle null cursor
+            Log.e("CursorError", "Cursor is null.");
+        }
+
+        database.close();
+        return upcomingAppointments;
+    }
+
     public void register (String username, String email , String password){
         ContentValues cv = new ContentValues();
         cv.put("username" , username);
