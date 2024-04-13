@@ -6,4 +6,4 @@ Welcome to the Swasthya Sangam repository! This Android application is designed 
 
 - **Name:** Swasthya Sangam
 - **Type:** Android Application
-- **Status:** Work in Progress
+
