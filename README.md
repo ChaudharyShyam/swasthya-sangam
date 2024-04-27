@@ -1,4 +1,4 @@
-#### Swasthya Sangam - Hospital Management Android Application
+## Swasthya Sangam - Hospital Management Android Application
 Swasthya Sangam is a comprehensive hospital management Android application designed to streamline various healthcare processes, including lab test bookings, medicine orders, doctor appointments, and hospital navigation. It offers users a convenient platform to access healthcare services efficiently.
 
 ## Features
