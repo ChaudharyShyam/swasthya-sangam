@@ -1,6 +1,5 @@
 
-![image](https://github.com/ChaudharyShyam/swasthya-sangam/assets/150513922/b88e61c6-0fcc-421c-bae1-6096d5813e3f)
-
+![Swasthya Sangam](https://github.com/ChaudharyShyam/swasthya-sangam/assets/150513922/882459c6-9312-4c9f-a762-7e5cf93e64d1)
 
 
 
